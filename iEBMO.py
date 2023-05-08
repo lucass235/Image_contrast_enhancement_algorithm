@@ -61,7 +61,6 @@ def fitness(agentCurr, inputAgent, inputImage, iterNo):
                 tmp[r, c] = -1
                 intsum += img2[r, c]
     # entropy of image
-    print('Trava aqui')
     flatImg = [x for sublist in img2 for x in sublist]
     uniqImg = set(flatImg)
     Hx = 0
@@ -84,7 +83,7 @@ def fitness(agentCurr, inputAgent, inputImage, iterNo):
                 min(tmp2.flatten()[~np.isin(tmp2.flatten(), -1)])))
     fit = math.log(math.log(intsum))*Hx*(count)*(1.02**(-(np.mean(img2)-np.mean(img))**2)
                                                  )*((max(img2.flatten())-min(img2.flatten()))**2)*((localcontrast))
-    # print(fit)
+    print(fit)
     return fit
 
 
@@ -286,13 +285,13 @@ for i in range(len(imageNameList)):
 #         plt.savefig("histogramsDIBCO/ho_"+imageNameList[i]) #histogram of output image
 #         plt.clf()
         transImageName = "o_"+imageNameList[i]
-        cv2.imwrite("outputDIBCO/"+transImageName, bestImage)
+        cv2.imwrite("./outputDIBCO/"+transImageName, bestImage)
 
 
 #     averagePsnr /= len(imageNameList)
 #     averageSsim /= len(imageNameList)
 #     averageVif /= len(imageNameList)
-#     print("final")
-#     print(averagePsnr)
-#     print(averageSsim)
-#     print(averageVif)
+    print("final")
+    print(averagePsnr)
+    print(averageSsim)
+    print(averageVif)
