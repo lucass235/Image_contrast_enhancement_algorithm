@@ -1,3 +1,8 @@
 # ignore dataset
+**/data/dataset
 
-**/data
+**/data/DIPCO2016_dataset
+
+**/data/kodim
+
+**/data/fivek_dataset
