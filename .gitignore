@@ -1,2 +1,5 @@
 # ignore dataset
 **/data/fivek_dataset
+
+#  py cache
+**/__pycache__
