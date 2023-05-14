@@ -6,3 +6,4 @@ seaborn
 opencv-python
 numpy
 sewar
+scikit-image
