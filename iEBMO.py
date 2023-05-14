@@ -228,70 +228,70 @@ imageNameList = ['./data/kodim/kodim01.png', './data/kodim/kodim02.png', './data
 # imageNameList = ['InputBoy.jpg']
 # imageNameList = ['boy.jpg','lena.jpg','liftingbody.jpg','zebra.jpg']
 
-for i in range(len(imageNameList)):
-    averagePsnr = 0
-    averageSsim = 0
-    averageVif = 0
-    print(imageNameList[i])
-    for popSize in pSize:
-        print(popSize)
+# for i in range(len(imageNameList)):
+#     averagePsnr = 0
+#     averageSsim = 0
+#     averageVif = 0
+#     print(imageNameList[i])
+#     for popSize in pSize:
+#         print(popSize)
 
-        # inputName = "GroundTruth/kodakDataset/"+imageNameList[i]
-        truthName = imageNameList[i]
+#         # inputName = "GroundTruth/kodakDataset/"+imageNameList[i]
+#         truthName = imageNameList[i]
 
-        trImg = cv2.imread(truthName, 0)
-        cv2.imshow('input', trImg)
-        histr = cv2.calcHist([trImg], [0], None, [256], [0, 256])
-        plt.plot(histr)
-        # histogram of ground truth
-        # plt.savefig("./histogramsDIBCO/ht_"+imageNameList[i])
-        plt.clf()
-        # cv2.imwrite("./truthDIBCO/t_"+imageNameList[i], trImg)
-
-        bestImage = deepcopy(trImg)
-
-        maxPsnr = 0
-        maxSsim = 0
-        maxVif = 0
-        maxfit = -1000
-        for iteration in range(10):
-            outputImage, fitval = bmoIE(truthName, popSize, maxIter)
-
-            truthImage = cv2.imread(truthName, 0)
-            psnrval = cv2.PSNR(outputImage, truthImage)
-            ssimval = ssim(outputImage, truthImage)
-            vifval = vifp(outputImage, truthImage)
-            # print(iteration,psnrval,ssimval,vifval,int((psnrval+ssimval+vifval)*100))
-#             print(psnrval, ssimval, vifval)
-#             continue
-
-            if (psnrval+ssimval+vifval) > maxfit:
-                maxfit = psnrval+ssimval+vifval
-                maxPsnr = psnrval
-                maxSsim = ssimval
-                maxVif = vifval
-                bestImage = deepcopy(outputImage)
-#             cv2.imshow(str(iteration+1),bestImage)
-
-        print(maxPsnr, maxSsim, maxVif)
-
-#         averagePsnr += maxPsnr
-#         averageSsim += maxSsim
-#         averageVif += maxVif
-#         print(i+1,averagePsnr,averageSsim,averageVif)
-
-#         histr = cv2.calcHist([bestImage],[0],None,[256],[0,256])
+#         trImg = cv2.imread(truthName, 0)
+#         cv2.imshow('input', trImg)
+#         histr = cv2.calcHist([trImg], [0], None, [256], [0, 256])
 #         plt.plot(histr)
-#         plt.savefig("histogramsDIBCO/ho_"+imageNameList[i]) #histogram of output image
+#         # histogram of ground truth
+#         # plt.savefig("./histogramsDIBCO/ht_"+imageNameList[i])
 #         plt.clf()
-        transImageName = "o_"+imageNameList[i]
-        cv2.imwrite("./outputDIBCO/"+transImageName, bestImage)
+#         # cv2.imwrite("./truthDIBCO/t_"+imageNameList[i], trImg)
+
+#         bestImage = deepcopy(trImg)
+
+#         maxPsnr = 0
+#         maxSsim = 0
+#         maxVif = 0
+#         maxfit = -1000
+#         for iteration in range(10):
+#             outputImage, fitval = bmoIE(truthName, popSize, maxIter)
+
+#             truthImage = cv2.imread(truthName, 0)
+#             psnrval = cv2.PSNR(outputImage, truthImage)
+#             ssimval = ssim(outputImage, truthImage)
+#             vifval = vifp(outputImage, truthImage)
+#             # print(iteration,psnrval,ssimval,vifval,int((psnrval+ssimval+vifval)*100))
+# #             print(psnrval, ssimval, vifval)
+# #             continue
+
+#             if (psnrval+ssimval+vifval) > maxfit:
+#                 maxfit = psnrval+ssimval+vifval
+#                 maxPsnr = psnrval
+#                 maxSsim = ssimval
+#                 maxVif = vifval
+#                 bestImage = deepcopy(outputImage)
+# #             cv2.imshow(str(iteration+1),bestImage)
+
+#         print(maxPsnr, maxSsim, maxVif)
+
+# #         averagePsnr += maxPsnr
+# #         averageSsim += maxSsim
+# #         averageVif += maxVif
+# #         print(i+1,averagePsnr,averageSsim,averageVif)
+
+# #         histr = cv2.calcHist([bestImage],[0],None,[256],[0,256])
+# #         plt.plot(histr)
+# #         plt.savefig("histogramsDIBCO/ho_"+imageNameList[i]) #histogram of output image
+# #         plt.clf()
+#         transImageName = "o_"+imageNameList[i]
+#         cv2.imwrite("./outputDIBCO/"+transImageName, bestImage)
 
 
-#     averagePsnr /= len(imageNameList)
-#     averageSsim /= len(imageNameList)
-#     averageVif /= len(imageNameList)
-    print("final")
-    print(averagePsnr)
-    print(averageSsim)
-    print(averageVif)
+# #     averagePsnr /= len(imageNameList)
+# #     averageSsim /= len(imageNameList)
+# #     averageVif /= len(imageNameList)
+#     print("final")
+#     print(averagePsnr)
+#     print(averageSsim)
+#     print(averageVif)
