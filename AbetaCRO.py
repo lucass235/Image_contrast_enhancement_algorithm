@@ -415,20 +415,20 @@ def coral_reef(dataset):
     return testAcc, featCnt
 
 
-datasetlist = ["./data/UCI_datasets/BreastCancer.csv", "./data/UCI_datasets/BreastEW.csv", "./data/UCI_datasets/CongressEW.csv", "./data/UCI_datasets/Exactly.csv", "./data/UCI_datasets/Exactly2.csv", "./data/UCI_datasets/HeartEW.csv", "./data/UCI_datasets/Ionosphere.csv", "./data/UCI_datasets/KrVsKpEW.csv", "./data/UCI_datasets/Lymphography.csv",
-               "./data/UCI_datasets/M-of-n.csv", "./data/UCI_datasets/PenglungEW.csv", "./data/UCI_datasets/Sonar.csv", "./data/UCI_datasets/SpectEW.csv", "./data/UCI_datasets/Tic-tac-toe.csv", "./data/UCI_datasets/Vote.csv", "./data/UCI_datasets/WaveformEW.csv", "./data/UCI_datasets/Wine.csv", "./data/UCI_datasets/Zoo.csv"]
+# datasetlist = ["./data/UCI_datasets/BreastCancer.csv", "./data/UCI_datasets/BreastEW.csv", "./data/UCI_datasets/CongressEW.csv", "./data/UCI_datasets/Exactly.csv", "./data/UCI_datasets/Exactly2.csv", "./data/UCI_datasets/HeartEW.csv", "./data/UCI_datasets/Ionosphere.csv", "./data/UCI_datasets/KrVsKpEW.csv", "./data/UCI_datasets/Lymphography.csv",
+#                "./data/UCI_datasets/M-of-n.csv", "./data/UCI_datasets/PenglungEW.csv", "./data/UCI_datasets/Sonar.csv", "./data/UCI_datasets/SpectEW.csv", "./data/UCI_datasets/Tic-tac-toe.csv", "./data/UCI_datasets/Vote.csv", "./data/UCI_datasets/WaveformEW.csv", "./data/UCI_datasets/Wine.csv", "./data/UCI_datasets/Zoo.csv"]
 
-for datasetname in datasetlist:
-    accuArr = []
-    featArr = []
-    for i in range(15):
-        testAcc, featCnt = coral_reef(datasetname)
-        accuArr.append(testAcc)
-        featArr.append(featCnt)
-    maxx = max(accuArr)
-    currFeat = 20000
-    for i in range(np.shape(accuArr)[0]):
-        if accuArr[i] == maxx and featArr[i] < currFeat:
-            currFeat = featArr[i]
-    print(datasetname)
-    print(maxx, currFeat)
+# for datasetname in datasetlist:
+#     accuArr = []
+#     featArr = []
+#     for i in range(15):
+#         testAcc, featCnt = coral_reef(datasetname)
+#         accuArr.append(testAcc)
+#         featArr.append(featCnt)
+#     maxx = max(accuArr)
+#     currFeat = 20000
+#     for i in range(np.shape(accuArr)[0]):
+#         if accuArr[i] == maxx and featArr[i] < currFeat:
+#             currFeat = featArr[i]
+#     print(datasetname)
+#     print(maxx, currFeat)
