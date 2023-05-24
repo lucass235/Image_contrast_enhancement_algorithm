@@ -1,3 +1,4 @@
+import datetime
 import cv2
 import sys
 import math
@@ -125,31 +126,33 @@ def bmoIE(imageName, popSize, maxIter):
 #             img[y,x] = int(np.clip(alpha*img[y,x] + beta, 0, 255))
     inputImageName = imageName.split('/')[-1]
 #     inputImageName = "i_"+inputImageName
-#     cv2.imwrite("inputDIBCO/"+inputImageName,img)
+    # cv2.imwrite("inputDIBCO/"+inputImageName,img)
+    cv2.imwrite(f"./inputDIBCO/{inputImageName}", img)
 
     histr = cv2.calcHist([img], [0], None, [256], [0, 256])
     plt.plot(histr)
-#     plt.savefig("histogramsDIBCO/hi_"+imageNameList[i]) #histogram of output image
+    # plt.savefig(f"./histogramsDIBCO/ho_{inputImageName}") #histogram of output image
+    # histogram of output image
     plt.clf()
     #####################
     inputImage = deepcopy(img)
-    # print(np.shape(img))
+    print(np.shape(img))
     flatImg = [x for sublist in img for x in sublist]
-    # print(flatImg)
+    print(flatImg)
     uniqImg = set(flatImg)
     agentLength = len(uniqImg)
-    # print(agentLength)
+    print(agentLength)
     inputAgent = list(uniqImg)
     inputAgent.sort()
     inputImage = deepcopy(img)
-    # print(inputAgent)
+    print(inputAgent)
 
     population = initialize(popSize, agentLength)
     dimension = agentLength
 
     start_time = datetime.now()
     fitList = allfit(population, inputAgent, img, 0)
-    # temp = [-x for x in fitList]
+    temp = [-x for x in fitList]
     # sort agents
     # population = [x for _,x in sorted(zip(temp,population))]
     arr1inds = fitList.argsort()
@@ -192,10 +195,10 @@ def bmoIE(imageName, popSize, maxIter):
                 receivedList.remove(inx)
             fitList.insert(inx, currFit)
 
-#         bestAgent = population[0].copy();
-#         print(max(fitList))
-#         with open("BMO_fit5.csv","a") as f:
-#             print(imageName,currIter, max(fitList),sep=',',file=f)
+        bestAgent = population[0].copy()
+        print(max(fitList))
+        with open("BMO_fit5.csv", "a") as f:
+            print(imageName, currIter, max(fitList), sep=',', file=f)
 
     bestAgent = population[0].copy()
     bestImage = transformImage(bestAgent, inputAgent, inputImage, maxIter)
@@ -213,20 +216,12 @@ def bmoIE(imageName, popSize, maxIter):
 
 
 # ============================================================
-pSize = [30]
-maxIter = 100
-# imageNameList = ['./data/kodim/kodim01.png', './data/kodim/kodim02.png', './data/kodim/kodim03.png', './data/kodim/kodim04.png', './data/kodim/kodim05.png','./data/kodim/kodim06.png','./data/kodim/kodim07.png','./data/kodim/kodim08.png','./data/kodim/kodim09.png','./data/kodim/kodim10.png','./data/kodim/kodim11.png','./data/kodim/kodim12.png','./data/kodim/kodim13.png','./data/kodim/kodim14.png','./data/kodim/kodim15.png','./data/kodim/kodim16.png','./data/kodim/kodim17.png','./data/kodim/kodim18.png','./data/kodim/kodim19.png','./data/kodim/kodim20.png','./data/kodim/kodim21.png','./data/kodim/kodim22.png','./data/kodim/kodim23.png','./data/kodim/kodim24.png']
-# imageNameList = ['dibco1.png', 'dibco2.png', 'dibco3.png', 'dibco4.png', 'dibco5.png', 'dibco6.png', 'dibco7.png', 'dibco8.png', 'dibco9.png', 'dibco10.png']
-# imageNameList = ['a0027.tiff', 'a0037.tiff', 'a0050.tiff']
-# imageNameList = ['a0027.png', 'a0037.png', 'a0050.png']
+# pSize = [30]
+# maxIter = 100
+
+# imageNameList = ['./data/kodim/kodim07.png']
 
 # print(imageNameList)
-
-imageNameList = ['./data/kodim/kodim01.png', './data/kodim/kodim02.png', './data/kodim/kodim03.png', './data/kodim/kodim04.png',
-                 './data/kodim/kodim05.png', './data/kodim/kodim06.png', './data/kodim/kodim07.png', './data/kodim/kodim08.png', './data/kodim/kodim09.png']
-# imageNameList = ['lena_gray_256.tif','liftingbody.png','boy.jpg']
-# imageNameList = ['InputBoy.jpg']
-# imageNameList = ['boy.jpg','lena.jpg','liftingbody.jpg','zebra.jpg']
 
 # for i in range(len(imageNameList)):
 #     averagePsnr = 0
@@ -236,7 +231,7 @@ imageNameList = ['./data/kodim/kodim01.png', './data/kodim/kodim02.png', './data
 #     for popSize in pSize:
 #         print(popSize)
 
-#         # inputName = "GroundTruth/kodakDataset/"+imageNameList[i]
+#         inputName = "GroundTruth/kodakDataset/"+imageNameList[i]
 #         truthName = imageNameList[i]
 
 #         trImg = cv2.imread(truthName, 0)
@@ -244,11 +239,17 @@ imageNameList = ['./data/kodim/kodim01.png', './data/kodim/kodim02.png', './data
 #         histr = cv2.calcHist([trImg], [0], None, [256], [0, 256])
 #         plt.plot(histr)
 #         # histogram of ground truth
-#         # plt.savefig("./histogramsDIBCO/ht_"+imageNameList[i])
+#         name_image_list = imageNameList[i].split('/')
+#         # time = datetime.datetime.now()
+#         # print(time)
+#         plt.savefig(
+#             f"./histogramsDIBCO/ht_{name_image_list[-1]}")
 #         plt.clf()
-#         # cv2.imwrite("./truthDIBCO/t_"+imageNameList[i], trImg)
+#         cv2.imwrite(
+#             f"./truthDIBCO/t_{name_image_list[-1]}", trImg)
 
 #         bestImage = deepcopy(trImg)
+#         plt.imshow(bestImage)
 
 #         maxPsnr = 0
 #         maxSsim = 0
@@ -261,9 +262,9 @@ imageNameList = ['./data/kodim/kodim01.png', './data/kodim/kodim02.png', './data
 #             psnrval = cv2.PSNR(outputImage, truthImage)
 #             ssimval = ssim(outputImage, truthImage)
 #             vifval = vifp(outputImage, truthImage)
-#             # print(iteration,psnrval,ssimval,vifval,int((psnrval+ssimval+vifval)*100))
-# #             print(psnrval, ssimval, vifval)
-# #             continue
+#             print(iteration, psnrval, ssimval, vifval,
+#                   int((psnrval+ssimval+vifval)*100))
+#             print(psnrval, ssimval, vifval)
 
 #             if (psnrval+ssimval+vifval) > maxfit:
 #                 maxfit = psnrval+ssimval+vifval
@@ -271,26 +272,29 @@ imageNameList = ['./data/kodim/kodim01.png', './data/kodim/kodim02.png', './data
 #                 maxSsim = ssimval
 #                 maxVif = vifval
 #                 bestImage = deepcopy(outputImage)
-# #             cv2.imshow(str(iteration+1),bestImage)
+#             cv2.imshow(str(iteration+1), bestImage)
 
 #         print(maxPsnr, maxSsim, maxVif)
 
-# #         averagePsnr += maxPsnr
-# #         averageSsim += maxSsim
-# #         averageVif += maxVif
-# #         print(i+1,averagePsnr,averageSsim,averageVif)
+#         averagePsnr += maxPsnr
+#         averageSsim += maxSsim
+#         averageVif += maxVif
+#         print(i+1, averagePsnr, averageSsim, averageVif)
 
-# #         histr = cv2.calcHist([bestImage],[0],None,[256],[0,256])
-# #         plt.plot(histr)
-# #         plt.savefig("histogramsDIBCO/ho_"+imageNameList[i]) #histogram of output image
-# #         plt.clf()
-#         transImageName = "o_"+imageNameList[i]
-#         cv2.imwrite("./outputDIBCO/"+transImageName, bestImage)
+#         histr = cv2.calcHist([bestImage], [0], None, [256], [0, 256])
+#         plt.plot(histr)
+#         time = datetime.datetime.now()
+#         # histogram of output image
+#         plt.savefig(
+#             f"./histogramsDIBCO/ho_{str(time).split('.')[1]}{name_image_list[-1]}")
+#         plt.clf()
+#         transImageName = "o_"+name_image_list[-1]
+#         cv2.imwrite(
+#             f"./outputDIBCO/{str(time).split('.')[1]}{transImageName}", bestImage)
 
-
-# #     averagePsnr /= len(imageNameList)
-# #     averageSsim /= len(imageNameList)
-# #     averageVif /= len(imageNameList)
+#     averagePsnr /= len(imageNameList)
+#     averageSsim /= len(imageNameList)
+#     averageVif /= len(imageNameList)
 #     print("final")
 #     print(averagePsnr)
 #     print(averageSsim)
