@@ -130,15 +130,15 @@ def bmoIE(imageName, popSize, maxIter):
     cv2.imwrite(f"./inputDIBCO/{inputImageName}", img)
 
     histr = cv2.calcHist([img], [0], None, [256], [0, 256])
-    plt.plot(histr)
+    # plt.plot(histr)
     # plt.savefig(f"./histogramsDIBCO/ho_{inputImageName}") #histogram of output image
     # histogram of output image
     plt.clf()
     #####################
     inputImage = deepcopy(img)
-    print(np.shape(img))
+    # print(np.shape(img))
     flatImg = [x for sublist in img for x in sublist]
-    print(flatImg)
+    # print(flatImg)
     uniqImg = set(flatImg)
     agentLength = len(uniqImg)
     print(agentLength)
